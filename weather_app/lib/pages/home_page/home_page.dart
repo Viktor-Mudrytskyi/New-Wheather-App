@@ -13,7 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<Forecast>? forecast;
+  Future<Forecast?>? forecast;
+  bool isUpdating=false;
   String _cityName = 'London';
 
   @override
@@ -35,8 +36,9 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(Icons.my_location),
           onPressed: () {
             setState(() {
-              forecast=null;
+              isUpdating=true;
               forecast = WheatherApi.fetchForecastLonLat();
+              forecast?.then((value) => isUpdating=false);
             });
           },
         ),
@@ -46,7 +48,9 @@ class _HomePageState extends State<HomePage> {
               final name=await Navigator.of(context).pushNamed('/city_page');
               _cityName=name as String;
               setState(() {
+                isUpdating=true;
                 forecast=WheatherApi.fetchForecast(_cityName);
+                forecast?.then((value) => isUpdating=false);
               });
               log(_cityName);
             },
@@ -57,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       body: FutureBuilder(
         future: forecast,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData&&!isUpdating) {
             return ListView(
               children: [
                 const SizedBox(height: 50),

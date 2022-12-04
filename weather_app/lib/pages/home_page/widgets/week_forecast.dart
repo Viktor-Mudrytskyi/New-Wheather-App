@@ -8,7 +8,7 @@ class WeekForecast extends StatelessWidget {
     super.key,
     required this.snapshot,
   });
-  final AsyncSnapshot<Forecast> snapshot;
+  final AsyncSnapshot<Forecast?> snapshot;
 
   @override
   Widget build(BuildContext context) {

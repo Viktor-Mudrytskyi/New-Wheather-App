@@ -9,7 +9,7 @@ class AdditionalInfo extends StatelessWidget {
     required this.snapshot,
   });
 
-  final AsyncSnapshot<Forecast> snapshot;
+  final AsyncSnapshot<Forecast?> snapshot;
 
   @override
   Widget build(BuildContext context) {

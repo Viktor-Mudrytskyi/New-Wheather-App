@@ -3,7 +3,7 @@ import 'package:weather_app/models/wheather_model/wheather_model.dart';
 
 class TempView extends StatelessWidget {
   const TempView({super.key, required this.snapshot});
-  final AsyncSnapshot<Forecast> snapshot;
+  final AsyncSnapshot<Forecast?> snapshot;
 
   @override
   Widget build(BuildContext context) {

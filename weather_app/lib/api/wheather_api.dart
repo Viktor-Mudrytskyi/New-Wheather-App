@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:weather_app/utilities/location.dart';
 
 class WheatherApi {
-  static Future<Forecast> fetchForecast(String cityName) async {
+  static Future<Forecast?>? fetchForecast(String cityName) async {
     var uri = Uri.parse(
         'https://api.openweathermap.org/data/2.5/forecast/daily?q=$cityName&appid=1369dd6b5ae78fc9952261ab9aa236b4&units=metric');
     var response = await http.get(uri);
@@ -15,7 +15,8 @@ class WheatherApi {
       return Forecast.fromJson(jsonDecode(response.body));
       
     } else {
-      throw Exception('Not found');
+      log('No data found');
+      return null;
     }
   }
   static Future<Forecast> fetchForecastLonLat() async {
