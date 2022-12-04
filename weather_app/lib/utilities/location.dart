@@ -8,10 +8,9 @@ class Location {
   Future<void> getCurrentLoc() async {
     final pos = await _determinePosition();
     log(pos.toString());
-    if (pos is Position) {
       lon = pos.longitude;
       lat = pos.latitude;
-    }
+ 
   }
 
   Future<Position> _determinePosition() async {
